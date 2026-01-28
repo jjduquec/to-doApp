@@ -1,0 +1,14 @@
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\bin\Debug\net10.0\ToDoConsoleApp.exe
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\bin\Debug\net10.0\ToDoConsoleApp.deps.json
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\bin\Debug\net10.0\ToDoConsoleApp.runtimeconfig.json
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\bin\Debug\net10.0\ToDoConsoleApp.dll
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\bin\Debug\net10.0\ToDoConsoleApp.pdb
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.AssemblyInfoInputs.cache
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.AssemblyInfo.cs
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.dll
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\refint\ToDoConsoleApp.dll
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.pdb
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ToDoConsoleApp.genruntimeconfig.cache
+C:\Users\juanj\Desktop\CsharpProjects\ToDoConsoleApp\obj\Debug\net10.0\ref\ToDoConsoleApp.dll
