@@ -16,11 +16,22 @@ class GraficalView
                                                         "List All TODO Tasks",
                                                         "List All In-Progress Tasks",
                                                         "List All Done Tasks"
-                                                        }); 
+                                                        });
 
-            Console.WriteLine(option);  
+            switch (option)
+            {
+                case "Add Task": 
+                    this.AddTask(); 
+                    break;    
+            }
                 
 
+        }
+
+        private void AddTask(){
+
+            var task=Prompt.Input<String>("What is the task name?"); 
+            Console.WriteLine($"The task is : {task}");
         }
 
 
