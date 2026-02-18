@@ -39,16 +39,16 @@ namespace Controller
         {
             int Id=0; 
             string file= this.getTasksFile(); 
-            string jsonString=File.ReadAllText(file);
-            if ((!File.Exists(file)) || (string.IsNullOrWhiteSpace(jsonString)) ){
+            
+            if ((!File.Exists(file)) || (string.IsNullOrWhiteSpace(File.ReadAllText(file))) ){
                 Id=1;
-
 
             }
             else
             {
+                var string jsonString=File.ReadAllText(file);
                 var tasks=JsonSerializer.Deserialize<List<Task>>(jsonString);
-                if(tasks==null || tasks.Count == 0)
+                if(tasks==null)
                 {
                     Id=1;
                 }
