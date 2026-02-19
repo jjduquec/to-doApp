@@ -9,7 +9,14 @@ namespace Model{
 
         public DateOnly UpdateDate {get;set;}
 
-        
+        public TaskModel()
+        {
+            Id=0;  
+            Description=""; 
+            Status="ToDo"; 
+            CreationDate=DateOnly.FromDateTime(DateTime.Today);
+            UpdateDate=DateOnly.FromDateTime(DateTime.Today);
+        }    
 
 
         

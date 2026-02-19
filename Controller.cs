@@ -14,20 +14,61 @@ namespace Controller
         public TaskController()
         {
             
-        }
+        }   
 
-        
         public int AddTask(string Description)
         {
-            TaskModel task = new TaskModel();   
-            task.Description= Description;  
-            task.Status="todo"; 
-            task.CreationDate=DateOnly.FromDateTime(DateTime.Today); 
-            task.UpdateDate=task.CreationDate;  
+            int id=1;
+            try{
+                TaskModel task = new TaskModel();   
+                task.Description= Description;  
+                task.Status="todo"; 
+                var allTasks=this.getAllTasks();  
+                if( allTasks!=null)
+                {
+                    task.Id=allTasks.Max(i=>i.Id)+1;
+                    id=task.Id;  
+                    allTasks.Add(task); 
+                }
+                else
+                {
+                    task.Id=id;  
+                }
 
-            //pending : get the new Id to set  
+                string json= JsonSerializer.Serialize(allTasks);
+                var file=this.getTasksFile();  
+                File.WriteAllText(file,json);
 
-            return -1;
+
+                /*task.Id=this.getNewId(); 
+                string json=JsonSerializer.Serialize(task);  
+                var file=this.getTasksFile(); 
+                StreamWriter writer=File.AppendText(file);  
+                writer.WriteLine(json);  
+                */
+                
+            }catch(Exception e)
+            {
+                
+                id=-1;
+            }
+
+            
+
+            return id;
+        }
+
+        public List<TaskModel> getAllTasks()
+        {
+            List<TaskModel> allTasks = new List<TaskModel>();
+            var file=this.getTasksFile();
+            if (File.Exists(file))
+            {
+                string data=File.ReadAllText(file);  
+                allTasks=JsonSerializer.Deserialize<List<TaskModel>>(data); 
+
+            }
+            return allTasks; 
         }
 
         private string getTasksFile()
@@ -37,26 +78,15 @@ namespace Controller
         }
         private int getNewId()
         {
-            int Id=0; 
-            string file= this.getTasksFile(); 
-            
-            if ((!File.Exists(file)) || (string.IsNullOrWhiteSpace(File.ReadAllText(file))) ){
-                Id=1;
-
-            }
-            else
-            {
-                var string jsonString=File.ReadAllText(file);
-                var tasks=JsonSerializer.Deserialize<List<Task>>(jsonString);
-                if(tasks==null)
-                {
-                    Id=1;
-                }
-                else
+            int Id=1; 
+            var tasks=this.getAllTasks();  
+            //check if file exists and look for the highest id task 
+            if((!(tasks==null) || !(tasks.Count==0)))
                 {
                     Id=tasks.Max(task =>task.Id)+1;  
                 }
-            }
+               
+            
             
 
             return Id; 

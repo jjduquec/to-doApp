@@ -1,4 +1,5 @@
 using System; 
+using Controller;
 using Sharprompt;  
 
 namespace views; 
@@ -44,7 +45,18 @@ class GraficalView
                 Console.WriteLine("Task name cannot be empty");
                 
             }else{
-                Console.WriteLine($"Task {task} added successfully");
+                TaskController controller= new TaskController();  
+                var result= controller.AddTask(task);  
+                if(result != -1)
+                {
+                  Console.WriteLine("Task has been added succesfully\n"); 
+                  Console.WriteLine($"Task Id: {result}");  
+                }
+                else
+                {
+                 Console.WriteLine("Something went wrong, please check \n");   
+                 Console.WriteLine($"Id received: {result}");
+                }
             } 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(); 
