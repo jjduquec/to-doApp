@@ -1,0 +1,4 @@
+System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.ThrowHelper.ThrowNoElementsException()
+   at System.Linq.Enumerable.MaxInteger[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   at Controller.TaskController.AddTask(String Description) in /home/juan/Desktop/toDo/Controller.cs:line 29

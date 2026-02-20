@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZYrwmLj15YI=",
+  "dgSpecHash": "RTmgVbqfauc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\juanj\\Desktop\\CsharpProjects\\ToDoConsoleApp\\ToDoConsoleApp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/juan/Desktop/toDo/ToDoConsoleApp.csproj",
+  "expectedPackageFiles": [
+    "/home/juan/.nuget/packages/sharprompt/3.0.1/sharprompt.3.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

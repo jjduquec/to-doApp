@@ -54,7 +54,7 @@ class GraficalView
                 }
                 else
                 {
-                 Console.WriteLine("Something went wrong, please check \n");   
+                 Console.WriteLine("Something went wrong, please check the log file \n");   
                  Console.WriteLine($"Id received: {result}");
                 }
             } 

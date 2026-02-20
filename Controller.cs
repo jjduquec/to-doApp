@@ -14,7 +14,7 @@ namespace Controller
         public TaskController()
         {
             
-        }   
+        }
 
         public int AddTask(string Description)
         {
@@ -24,7 +24,7 @@ namespace Controller
                 task.Description= Description;  
                 task.Status="todo"; 
                 var allTasks=this.getAllTasks();  
-                if( allTasks!=null)
+                if( allTasks!=null )
                 {
                     task.Id=allTasks.Max(i=>i.Id)+1;
                     id=task.Id;  
@@ -40,16 +40,12 @@ namespace Controller
                 File.WriteAllText(file,json);
 
 
-                /*task.Id=this.getNewId(); 
-                string json=JsonSerializer.Serialize(task);  
-                var file=this.getTasksFile(); 
-                StreamWriter writer=File.AppendText(file);  
-                writer.WriteLine(json);  
-                */
+                
                 
             }catch(Exception e)
             {
-                
+                var logFile=Path.Join(Directory.GetCurrentDirectory(),"log.txt") ;
+                File.WriteAllText(logFile,e.ToString());
                 id=-1;
             }
 

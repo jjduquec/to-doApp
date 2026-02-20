@@ -1,39 +1,69 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "Sharprompt/3.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Sharprompt.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Sharprompt.dll": {}
+        },
+        "resource": {
+          "lib/net8.0/de-DE/Sharprompt.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/net8.0/ja/Sharprompt.resources.dll": {
+            "locale": "ja"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Sharprompt/3.0.1": {
+      "sha512": "SUsdtFgpf0CJVSuW+6bsNNSRj5V3GzTNENCav9PGlwtAi8JueG4DDeKa2cAyM6wnLTdXRwsB/S21VBg6J6OksA==",
+      "type": "package",
+      "path": "sharprompt/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Sharprompt.dll",
+        "lib/net8.0/de-DE/Sharprompt.resources.dll",
+        "lib/net8.0/ja/Sharprompt.resources.dll",
+        "sharprompt.3.0.1.nupkg.sha512",
+        "sharprompt.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "Sharprompt >= 3.0.1"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\juanj\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/juan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juanj\\Desktop\\CsharpProjects\\ToDoConsoleApp\\ToDoConsoleApp.csproj",
+      "projectUniqueName": "/home/juan/Desktop/toDo/ToDoConsoleApp.csproj",
       "projectName": "ToDoConsoleApp",
-      "projectPath": "C:\\Users\\juanj\\Desktop\\CsharpProjects\\ToDoConsoleApp\\ToDoConsoleApp.csproj",
-      "packagesPath": "C:\\Users\\juanj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juanj\\Desktop\\CsharpProjects\\ToDoConsoleApp\\obj\\",
+      "projectPath": "/home/juan/Desktop/toDo/ToDoConsoleApp.csproj",
+      "packagesPath": "/home/juan/.nuget/packages/",
+      "outputPath": "/home/juan/Desktop/toDo/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\juanj\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/juan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -57,6 +87,12 @@
     "frameworks": {
       "net10.0": {
         "targetAlias": "net10.0",
+        "dependencies": {
+          "Sharprompt": {
+            "target": "Package",
+            "version": "[3.0.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -73,7 +109,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.101/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
