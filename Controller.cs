@@ -75,23 +75,11 @@ namespace Controller
                 {
                     var data=File.ReadAllText(file);  
                     allTasks=JsonSerializer.Deserialize<List<TaskModel>>(data);
-                    /*
-                    if (data != null)
-                    {
-                        allTasks = deserializedData;
-                    }
-                    else
-                    {
-                        allTasks= new List<TaskModel>(); 
-                    }
-                    */
+                    
+                
 
                 }
-                /*
-                else{
-                    allTasks= new List<TaskModel>(); 
-                }
-                */
+               
 
                 return allTasks; 
 
