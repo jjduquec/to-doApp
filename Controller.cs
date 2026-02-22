@@ -20,25 +20,36 @@ namespace Controller
         {
             int id=1;
             try{
-                TaskModel task = new TaskModel();   
+                var task = new TaskModel();   
+                var allTasks= new List<TaskModel>(); 
                 task.Description= Description;  
                 task.Status="todo"; 
-                var allTasks=this.getAllTasks();  
-                if( allTasks!=null )
+                allTasks=this.getAllTasks();  
+                 
+                                
+                if (allTasks.Count==0)
                 {
-                    task.Id=allTasks.Max(i=>i.Id)+1;
-                    id=task.Id;  
-                    allTasks.Add(task); 
+                    task.Id=1;
                 }
                 else
                 {
-                    task.Id=id;  
+                    task.Id=allTasks.Max(i=>i.Id)+1;
+                    id=task.Id;  
+                    
+                
                 }
 
-                string json= JsonSerializer.Serialize(allTasks);
-                var file=this.getTasksFile();  
-                File.WriteAllText(file,json);
 
+                allTasks.Add(task); 
+                string data=JsonSerializer.Serialize(allTasks,new JsonSerializerOptions
+                                                                                        {
+                                                                               WriteIndented=true             
+                                                                                            
+                                                                                        });
+
+                var file=this.getTasksFile();  
+                File.WriteAllText(file,data);
+                
 
                 
                 
@@ -56,15 +67,42 @@ namespace Controller
 
         public List<TaskModel> getAllTasks()
         {
-            List<TaskModel> allTasks = new List<TaskModel>();
-            var file=this.getTasksFile();
-            if (File.Exists(file))
+            try
             {
-                string data=File.ReadAllText(file);  
-                allTasks=JsonSerializer.Deserialize<List<TaskModel>>(data); 
+                var allTasks= new List<TaskModel>();  
+                string file=this.getTasksFile();
+                if (File.Exists(file))
+                {
+                    var data=File.ReadAllText(file);  
+                    allTasks=JsonSerializer.Deserialize<List<TaskModel>>(data);
+                    /*
+                    if (data != null)
+                    {
+                        allTasks = deserializedData;
+                    }
+                    else
+                    {
+                        allTasks= new List<TaskModel>(); 
+                    }
+                    */
+
+                }
+                /*
+                else{
+                    allTasks= new List<TaskModel>(); 
+                }
+                */
+
+                return allTasks; 
 
             }
-            return allTasks; 
+            catch
+            {
+                return new List<TaskModel>();     
+
+            }
+            
+            
         }
 
         private string getTasksFile()
