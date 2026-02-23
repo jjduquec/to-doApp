@@ -28,7 +28,12 @@ class GraficalView
                 {
                     case "Add Task": 
                         this.AddTask(); 
-                        break;    
+                        break;  
+
+                    case "List All Tasks":
+                        this.ListAllTasks();  
+                        break;  
+
                 }
                 
 
@@ -63,6 +68,34 @@ class GraficalView
 
             
          
+            
+        }
+
+        private void ListAllTasks()
+        {   
+            var controller = new TaskController();  
+            var taskList = new List<(int Id,string Description,string Status)>();  
+            taskList= controller.listAllTasks(); 
+            if(taskList.Count != 0)
+            {    
+
+               
+                foreach(var task in taskList)
+                {
+                    Console.WriteLine(task.Id+"\t"+task.Description+"\t"+task.Status+"\n");
+
+
+
+
+                }
+
+        }
+        else
+        {
+            Console.WriteLine("There are no new tasks \n");
+        }
+        Console.WriteLine("Press any key to continue \n");
+        Console.ReadKey(); 
             
         }
 

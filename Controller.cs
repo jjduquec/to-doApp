@@ -23,7 +23,6 @@ namespace Controller
                 var task = new TaskModel();   
                 var allTasks= new List<TaskModel>(); 
                 task.Description= Description;  
-                task.Status="todo"; 
                 allTasks=this.getAllTasks();  
                  
                                 
@@ -65,7 +64,26 @@ namespace Controller
             return id;
         }
 
-        public List<TaskModel> getAllTasks()
+        public List<(int,string,string)> listAllTasks()
+        {
+            var taskList = new List<(int,string,string)>();  
+            var allTasks= new List<TaskModel>();  
+
+            allTasks=this.getAllTasks(); 
+
+            if (allTasks.Count != 0)
+            {
+                foreach(var task in allTasks)
+                {
+                    var taskData=(task.Id,task.Description,task.Status); 
+                    taskList.Add(taskData); 
+                }
+            }
+
+            return taskList; 
+        }
+
+        private List<TaskModel> getAllTasks()
         {
             try
             {
