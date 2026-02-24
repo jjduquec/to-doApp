@@ -30,6 +30,11 @@ class GraficalView
                         this.AddTask(); 
                         break;  
 
+                    case "Update Task": 
+                        this.UpdateTask(); 
+                        break;
+
+
                     case "List All Tasks":
                         this.ListAllTasks();  
                         break;  
@@ -71,7 +76,49 @@ class GraficalView
             
         }
 
-        private void ListAllTasks()
+        
+        private void UpdateTask()
+        {
+            var controller= new TaskController();  
+            var taskList= new List<(int Id , string Description , string Status)>();  
+            var options= new List<string>();
+            var option=""; 
+            int taskId=0; 
+            taskList=controller.listAllTasks();  
+            if (taskList.Count==0)
+            {
+                Console.WriteLine("Tasks not found, please add a task ");
+                Console.WriteLine("Press any key to continue"); 
+                Console.ReadKey();
+
+            }
+            else
+            {
+                foreach(var task in taskList)
+                {
+                      option=$"{task.Id}\t{task.Description}\t{task.Status}";      
+                      options.Add(option); 
+                      
+                }    
+                options.Add("exit");
+
+                option=Prompt.Select("Select the task to be updated",options);
+                if (option != "exit")
+                {
+                    var temp=option.Split("\t"); 
+                    taskId=int.Parse(temp[0]); 
+                    
+                }
+                
+                Console.WriteLine("Press any key to continue"); 
+                Console.ReadKey(); 
+
+            }
+        
+        
+        
+        }//end UpdateTask
+         private void ListAllTasks()
         {   
             var controller = new TaskController();  
             var taskList = new List<(int Id,string Description,string Status)>();  
