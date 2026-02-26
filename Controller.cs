@@ -64,6 +64,47 @@ namespace Controller
             return id;
         }
 
+        public bool UpdateStatus(int Id , string NewItem,string ItemType)
+        {
+
+            var change=true;  
+            var allTasks= new List<TaskModel>(); 
+            var newTaskList= new List<TaskModel>();
+            var task= new TaskModel();
+            var file=this.getTasksFile();    
+            try{
+            
+            allTasks=this.getAllTasks();
+            task=allTasks.FirstOrDefault(t => t.Id==Id); 
+            task.UpdateDate=DateOnly.FromDateTime(DateTime.Today);
+            if (ItemType == "Status")
+            {
+                
+                task.Status=NewItem;  
+
+            }else
+            {
+                task.Description=NewItem;  
+
+            }  
+
+            newTaskList=allTasks.Where(x=>x.Id!=Id).ToList();  
+            newTaskList.Add(task);  
+            string data=JsonSerializer.Serialize(newTaskList, new JsonSerializerOptions
+                                                                 { WriteIndented=true});  
+            File.WriteAllText(file,data);
+            }catch(Exception e)
+            {
+                var logFile=Path.Join(Directory.GetCurrentDirectory(),"log.txt") ;
+                File.WriteAllText(logFile,e.ToString());
+                change=false; 
+            }    
+
+            
+            
+            return change; 
+        }
+
         public List<(int,string,string)> listAllTasks()
         {
             var taskList = new List<(int,string,string)>();  

@@ -1,4 +1,5 @@
-using System; 
+using System;
+using System.Reflection;
 using Controller;
 using Sharprompt;  
 
@@ -84,6 +85,7 @@ class GraficalView
             var options= new List<string>();
             var option=""; 
             int taskId=0; 
+            bool result;  
             taskList=controller.listAllTasks();  
             if (taskList.Count==0)
             {
@@ -107,6 +109,43 @@ class GraficalView
                 {
                     var temp=option.Split("\t"); 
                     taskId=int.Parse(temp[0]); 
+                    option=Prompt.Select("What you want update in this task?", new []
+                                                                                    {
+                                                                                     "Change the status", 
+                                                                                     "Change the desription",
+                                                                                     "exit"                                                                    
+                                                                                    } );
+
+                    switch (option)
+                    {
+                        case"Change the status":
+                            string newStatus=Prompt.Select("Select the new status",new []
+                                                                                        {
+                                                                                         "ToDo",
+                                                                                         "In-Progress",  
+                                                                                         "Done"  
+                                                                                        });
+
+                            result=controller.UpdateStatus(taskId,newStatus,"Status");
+                            if (result)
+                            {
+                                Console.WriteLine("Change has been made successfully ");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Something went wrong, please check the log file");    
+                            }
+
+                            break;    
+
+                        
+
+                        default: 
+                            Console.WriteLine("Task was not updated \n");
+                            break;
+
+                    }
+
                     
                 }
                 
