@@ -85,7 +85,7 @@ class GraficalView
             var options= new List<string>();
             var option=""; 
             int taskId=0; 
-            bool result;  
+            bool result=false;  
             taskList=controller.listAllTasks();  
             if (taskList.Count==0)
             {
@@ -126,25 +126,25 @@ class GraficalView
                                                                                          "Done"  
                                                                                         });
 
-                            result=controller.UpdateStatus(taskId,newStatus,"Status");
-                            if (result)
+                            result=controller.UpdateTask(taskId,newStatus,"Status");
+                            
+
+                            break;    
+                        case "Change the desription": 
+                            string newDescription=Prompt.Input<string>("What is the new description? ");
+                            result=controller.UpdateTask(taskId,newDescription,"Description");
+                            break;  
+                        
+
+                    }
+                    if (result)
                             {
                                 Console.WriteLine("Change has been made successfully ");
                             }
                             else
                             {
-                                Console.WriteLine("Something went wrong, please check the log file");    
+                                Console.WriteLine("Task hasn't been modified");
                             }
-
-                            break;    
-
-                        
-
-                        default: 
-                            Console.WriteLine("Task was not updated \n");
-                            break;
-
-                    }
 
                     
                 }
