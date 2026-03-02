@@ -64,7 +64,7 @@ namespace Controller
             return id;
         }
 
-        public bool UpdateStatus(int Id , string NewItem,string ItemType)
+        public bool UpdateTask(int Id , string NewItem,string ItemType)
         {
 
             var change=true;  
@@ -102,6 +102,33 @@ namespace Controller
 
             
             
+            return change; 
+        } 
+
+        public bool DeleteTask(int Id)
+        {
+            var change=true;
+            var allTasks= new List<TaskModel>();  
+            var file=this.getTasksFile();
+            var data="";
+            try
+            {
+                allTasks=this.getAllTasks(); 
+                allTasks=(allTasks.Where(t=>t.Id != Id)).OrderBy(t=>t.Id).ToList();   
+                data=JsonSerializer.Serialize(allTasks,new JsonSerializerOptions
+                                                        {WriteIndented=true});
+ 
+                File.WriteAllText(file,data);  
+
+
+            }catch(Exception e)
+            {
+                change=false; 
+                var logFile=Path.Join(Directory.GetCurrentDirectory(),"log.txt") ;
+                File.WriteAllText(logFile,e.ToString());
+                
+            }
+
             return change; 
         }
 

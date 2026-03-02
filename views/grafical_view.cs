@@ -34,7 +34,10 @@ class GraficalView
                     case "Update Task": 
                         this.UpdateTask(); 
                         break;
-
+                    
+                    case "Delete Task":
+                        this.DeleteTask(); 
+                        break;
 
                     case "List All Tasks":
                         this.ListAllTasks();  
@@ -107,8 +110,8 @@ class GraficalView
                 option=Prompt.Select("Select the task to be updated",options);
                 if (option != "exit")
                 {
-                    var temp=option.Split("\t"); 
-                    taskId=int.Parse(temp[0]); 
+
+                    taskId=int.Parse((option.Split("\t"))[0]);                    
                     option=Prompt.Select("What you want update in this task?", new []
                                                                                     {
                                                                                      "Change the status", 
@@ -157,6 +160,50 @@ class GraficalView
         
         
         }//end UpdateTask
+
+        private void DeleteTask()
+        {
+            var controller= new TaskController();  
+            var taskList= new List<(int Id , string Description , string Status)>();  
+            var options= new List<string>();
+            var option=""; 
+            int taskId=0; 
+            bool result=false;  
+            taskList=controller.listAllTasks();   
+            foreach(var task in taskList)
+            {
+                      option=$"{task.Id}\t{task.Description}\t{task.Status}";      
+                      options.Add(option); 
+                      
+            }
+            options.Add("Exit"); 
+            option=Prompt.Select("Select the task to be deleted",options);
+        if (option != "Exit") 
+        {
+            //gettitng task Id 
+            taskId=int.Parse((option.Split("\t")[0]));   
+            result=controller.DeleteTask(taskId);
+            if (result)
+            {
+                Console.WriteLine("Task has been deleted successfully");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong , please check the log file");  
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("Delete operation has been canceled");  
+        }
+        Console.WriteLine("Press any key to continue");  
+        Console.ReadKey();  
+
+
+    
+            
+        }// end DeleteTask
          private void ListAllTasks()
         {   
             var controller = new TaskController();  
