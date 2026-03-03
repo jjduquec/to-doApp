@@ -1,1 +1,4 @@
 ./task.json
+./bin/
+./obj/
+./publish/
