@@ -23,7 +23,7 @@ namespace Controller
                 var task = new TaskModel();   
                 var allTasks= new List<TaskModel>(); 
                 task.Description= Description;  
-                allTasks=this.getAllTasks();  
+                allTasks=this.loadTasks();  
                  
                                 
                 if (allTasks.Count==0)
@@ -74,7 +74,7 @@ namespace Controller
             var file=this.getTasksFile();    
             try{
             
-            allTasks=this.getAllTasks();
+            allTasks=this.loadTasks();
             task=allTasks.FirstOrDefault(t => t.Id==Id); 
             task.UpdateDate=DateOnly.FromDateTime(DateTime.Today);
             if (ItemType == "Status")
@@ -113,7 +113,7 @@ namespace Controller
             var data="";
             try
             {
-                allTasks=this.getAllTasks(); 
+                allTasks=this.loadTasks(); 
                 allTasks=(allTasks.Where(t=>t.Id != Id)).OrderBy(t=>t.Id).ToList();   
                 data=JsonSerializer.Serialize(allTasks,new JsonSerializerOptions
                                                         {WriteIndented=true});
@@ -132,12 +132,12 @@ namespace Controller
             return change; 
         }
 
-        public List<(int,string,string)> listAllTasks()
+        public List<(int,string,string)> getAllTasks()
         {
             var taskList = new List<(int,string,string)>();  
             var allTasks= new List<TaskModel>();  
 
-            allTasks=this.getAllTasks(); 
+            allTasks=this.loadTasks(); 
 
             if (allTasks.Count != 0)
             {
@@ -155,7 +155,7 @@ namespace Controller
         {
 
             var taskList = new List<(int,string)>();
-            var allTasks=this.getAllTasks(); 
+            var allTasks=this.loadTasks(); 
             switch(Status){
                 case "ToDo": 
                     allTasks=allTasks.Where(t=>t.Status=="ToDo").ToList();
@@ -185,7 +185,7 @@ namespace Controller
             return taskList;
         }
 
-        private List<TaskModel> getAllTasks()
+        private List<TaskModel> loadTasks()
         {
             try
             {
@@ -221,7 +221,7 @@ namespace Controller
         private int getNewId()
         {
             int Id=1; 
-            var tasks=this.getAllTasks();  
+            var tasks=this.loadTasks();  
             //check if file exists and look for the highest id task 
             if((!(tasks==null) || !(tasks.Count==0)))
                 {
