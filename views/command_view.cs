@@ -10,8 +10,21 @@ class CommandView
         switch (command)
         {
             case "add":
-                this.addTask(parameters[1]);
-                break;  
+                if (parameters.Length==2)
+                {
+                    this.addTask(parameters[1]);
+                }
+                else
+                {
+                    Console.WriteLine("To add a task is required a description, eg : add \"wash the dishes\" ");
+                    Console.WriteLine("Please check your command");
+                }
+                
+                break;   
+            
+            case "list": 
+                this.listTasks(); 
+                break;
 
             case "update":
                 if (parameters.Length == 3)
@@ -20,10 +33,36 @@ class CommandView
                 }
                 else
                 {
-                    Console.WriteLine("For update a task is required : an id and a description");
+                    Console.WriteLine("To update a task is required : an id and a description");
                     Console.WriteLine("Please check your command");
                 }
-                
+                break;
+
+            case "mark-in-progress": 
+                if (parameters.Length == 2)
+                {
+                    this.updateStatus(int.Parse(parameters[1]),"In-Progress");
+                }
+                else
+                {
+                    Console.WriteLine("For mark a task in progress, its required the task Id eg: mark-in-progress 1");
+                    Console.WriteLine("Please check your command");
+                }
+              
+                break;
+
+            case "mark-done": 
+
+                if (parameters.Length == 2)
+                    {
+                        this.updateStatus(int.Parse(parameters[1]),"Done");
+                    }
+                    else
+                    {
+                        Console.WriteLine("To mark a task as done , its required the task Id eg: mark-done 1");
+                        Console.WriteLine("Please check your command");
+                    }
+
                 break;
         }
     } 
@@ -73,6 +112,39 @@ class CommandView
             }    
         }
         
+    }
+
+    private void listTasks()
+    {
+        var controller= new TaskController(); 
+        var taskList= new List<(int id , string description , string status)>();
+
+        taskList=controller.getAllTasks();
+        if (taskList.Count > 0)
+        {
+            foreach(var task in taskList)
+            {
+                Console.WriteLine(task.id+"\t"+task.description+"\t"+task.status);
+            }
+        }
+        else
+        {
+            Console.WriteLine("There are not task to show");
+        }
+    }
+    private void updateStatus(int id , string status)
+    {
+        var controller= new TaskController();  
+        bool change =controller.UpdateTask(id,status,"Status");
+        if (change)
+        {
+            Console.WriteLine("Task status has been updated");
+        }
+        else
+        {
+            Console.WriteLine("Something went wrong, please check the log");
+        }
+
     }
 
 
