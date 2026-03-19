@@ -23,8 +23,15 @@ class CommandView
                 break;   
             
             case "list": 
-                this.listTasks(); 
+                if (parameters.Length == 2)
+                {
+                    this.ListTasksByStatus(parameters[1]);
+                }
+                else{
+                    this.listTasks(); 
+                }
                 break;
+            
 
             case "update":
                 if (parameters.Length == 3)
@@ -126,6 +133,36 @@ class CommandView
         
     }
 
+    private void ListTasksByStatus(string status)
+    {
+        var controller= new TaskController(); 
+        var TaskList= new List<(int id,string description)>();
+        switch (status)
+        {
+            case "todo":
+                TaskList=controller.getTasksByStatus("ToDo");    
+                break;
+
+            case "done":  
+                TaskList=controller.getTasksByStatus("Done");
+                break;
+            case "in-progress": 
+                TaskList=controller.getTasksByStatus("In-Progress");
+                break;
+
+        }
+        if (TaskList.Count > 0)
+        {
+            foreach(var Task in TaskList)
+            {
+                Console.WriteLine(Task.id+"\t"+Task.description+"\n");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"There are not tasks with the status :{status}");
+        }
+    }
     private void listTasks()
     {
         var controller= new TaskController(); 
