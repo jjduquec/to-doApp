@@ -64,6 +64,18 @@ class CommandView
                     }
 
                 break;
+            
+            case "delete":
+                if (parameters.Length == 2)
+                {
+                    this.deleteTask(int.Parse(parameters[1]));
+                }
+                else
+                {
+                    Console.WriteLine("To delete a task , its required the task Id eg: delete 1");
+                     Console.WriteLine("Please check your command");
+                }
+                break;
         }
     } 
 
@@ -143,6 +155,20 @@ class CommandView
         else
         {
             Console.WriteLine("Something went wrong, please check the log");
+        }
+
+    }
+
+    private void deleteTask(int id)
+    {
+        var controller= new TaskController();
+        if (controller.DeleteTask(id))
+        {
+            Console.WriteLine("Task has been deleted succesfully");
+        }
+        else
+        {
+            Console.WriteLine("Something went wrong, please check your command");
         }
 
     }
